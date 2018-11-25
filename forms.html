@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-<title>php_test</title> 
+<title>vapour</title> 
 <meta charset="utf-8"> 
 </head> 
 
@@ -9,17 +9,35 @@
 
 <form action="form.php" name="form_1"> 
 	<br> 
-	<p>Мощность: <input type=text name="text1" value="в кВт"></p>
-	<p>Режим работы: </p>
+	<p>Введите необходимую мощность электростанции: <input type=text name="text1" value=""></p>
+	<p>Режим работы с сетью: </p>
 		<label>
-			Автономный <input type="radio" checked name="condition" value="condition_auto">
+			Параллельный <input type="radio" checked name="condition" value="condition_parallel">
 			<br>
-			Параллельный <input type="radio" name="condition" value="condition_parallel"> 
+			Автономный (островной) <input type="radio" name="condition" value="condition_auto"> 
 			<br>
 		</label>
-	<input style="margin-top: 10px" type=submit value="Send"> 
+	<p>Исполнение:
+		<select id="open_select">
+			<option value="">--Выберите тип исполения</option>
+			<option value="open">Открытое</option>
+			<option value="close">Закртыое</option>
+		</select>
+	</p>
+	<p>Выбросы в атмосферу:<br>NOx:
+		<select id="nox_select">
+			<option value="nox500">500 мг</option>
+			<option value="nox250">250 мг</option>
+		</select>
+	</p>
+	<p>Пусконаладочные работы:<br>
+		Необходимы со строны поставшика:
+		<input type="checkbox" value="startup_works">
+	</p>
+
+	<input style="margin-top: 10px" type=submit value="Рассчитать электростанцию"> 
 	<br> 
-	<input style="margin-top: 10px" type="reset" value="Reset"> 
+	<input style="margin-top: 10px" type="reset" value="Сбросить значения"> 
 	<br> 
 </form> 
 
