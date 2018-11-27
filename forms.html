@@ -7,7 +7,7 @@
 
 <body> 
 
-<form action="form.php" name="form_1"> 
+<form action="form.php" name="form_1" method="get"> 
 	<br> 
 	<p>Введите необходимую мощность электростанции: <input type=text name="text1" value=""></p>
 	<p>Режим работы с сетью: </p>
@@ -18,21 +18,21 @@
 			<br>
 		</label>
 	<p>Исполнение:
-		<select id="open_select">
+		<select id="open_select" name="inst_type">
 			<option value="">--Выберите тип исполения</option>
 			<option value="open">Открытое</option>
-			<option value="close">Закртыое</option>
+			<option value="close">Закрытое</option>
 		</select>
 	</p>
 	<p>Выбросы в атмосферу:<br>NOx:
-		<select id="nox_select">
-			<option value="nox500">500 мг</option>
-			<option value="nox250">250 мг</option>
+		<select id="nox_select" name="nox_select">
+			<option selected value="250">250 мг</option>
+			<option value="500">500 мг</option>
 		</select>
 	</p>
 	<p>Пусконаладочные работы:<br>
 		Необходимы со строны поставшика:
-		<input type="checkbox" value="startup_works">
+		<input type="checkbox" value="true" name="need_startup_works">
 	</p>
 
 	<input style="margin-top: 10px" type=submit value="Рассчитать электростанцию"> 

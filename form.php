@@ -13,7 +13,26 @@
 	{
 		print_r($result);
 		echo '<hr>';
+
 	}	
+
+	$power = $_GET['text1'];
+	$auto_condition = $_GET['condition'];
+	$inst_type = isset($_GET['inst_type']) ? $_GET['inst_type'] : 'NULL';
+	$nox = $_GET['nox_select'];
+	$need_works = isset($_GET['need_startup_works']) ? $_GET['need_startup_works'] :  'false';
+	echo $power;
+	echo '<br>';
+	echo $auto_condition;
+	echo '<br>';
+	echo $inst_type;
+	echo '<br>';
+	echo $nox;
+	echo '<br>';
+	echo $need_works;
+
+
+
 /*	require_once 'vendor/autoload.php';
 	require_once 'C:\xampp\htdocs\vapour\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php';
 	use PhpOffice\PhpSpreadsheet\Spreadsheet;
