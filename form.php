@@ -8,12 +8,14 @@
 		exit();
 	}
 
-	$result = mysqli_query($connection, "SELECT * FROM stations");
-	while(mysqli_fetch_assoc($result));
-	{
-		print_r($result);
-		echo '<hr>';
+	#запрос всех значений из таблицы
+	$result = mysqli_query($connection, "SELECT * FROM `stations`");
 
+	#Вывод всей таблицы
+	while(($record = mysqli_fetch_assoc($result)))
+	{
+		print_r($record);
+		echo '<hr>';
 	}	
 
 	$power = $_GET['text1'];
@@ -30,8 +32,29 @@
 	echo $nox;
 	echo '<br>';
 	echo $need_works;
+	echo '<hr>';
 
 
+	#запрос станций у которых мощность меньше необходимой или равна
+	$result_power = mysqli_query($connection, "SELECT id, name, power FROM `stations` WHERE power <= $power");
+	
+	#выводим эти станции и создаем массив 
+	$stations = array();
+	while(($record = mysqli_fetch_assoc($result_power)))
+	{	
+		print_r($record);
+		$stations[] = $record;
+		echo '<hr>';
+
+	}	
+
+	for($i=0; $i < mysqli_num_rows($result_power);$i++)
+	{
+		$count = intdiv($power,$stations[$i]["power"]) + 1;
+		$counts[$i] = $count;
+		echo $counts[$i]." станции ".$stations[$i]["name"]."<br>";
+	}
+	
 
 /*	require_once 'vendor/autoload.php';
 	require_once 'C:\xampp\htdocs\vapour\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php';
