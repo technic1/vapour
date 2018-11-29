@@ -36,7 +36,7 @@
 
 
 	#запрос станций у которых мощность меньше необходимой или равна
-	$result_power = mysqli_query($connection, "SELECT id, name, power FROM `stations` WHERE power <= $power");
+	$result_power = mysqli_query($connection, "SELECT * FROM `stations` WHERE power <= $power");
 	
 	#выводим эти станции и создаем массив 
 	$stations = array();
@@ -46,15 +46,41 @@
 		$stations[] = $record;
 		echo '<hr>';
 
-	}	
+	}
 
+	#нахождение количества станций и определние наилучшего варианта
+	
+	$index = 0;	
 	for($i=0; $i < mysqli_num_rows($result_power);$i++)
 	{
 		$count = intdiv($power,$stations[$i]["power"]) + 1;
 		$counts[$i] = $count;
 		echo $counts[$i]." станции ".$stations[$i]["name"]."<br>";
+		$sum_power[$i] = $counts[$i]*$stations[$i]["power"];
 	}
+	$diff_result = $counts[0]*$stations[0]["power"] - $power;
 	
+	for($i=0; $i < mysqli_num_rows($result_power);$i++)	
+	{
+		if ($diff_result > ($diff = $sum_power[$i] - $power ) )
+		{
+			$diff_result = $diff;
+			$index = $i;
+		}
+		echo "разница мощности ".$diff_result." ";
+	}
+	echo "<hr>";
+	echo $counts[$index]." станции ".$stations[$index]["name"]." с мощностью : ".$stations[$index]["power"]." Вт" ;
+
+
+
+	#вывод стоимости 
+	$cost = 0;
+	if ($auto_condition == open)
+	{
+		$cost += $stations[$index]["open"];
+	}
+	echo $cost;
 
 /*	require_once 'vendor/autoload.php';
 	require_once 'C:\xampp\htdocs\vapour\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php';
